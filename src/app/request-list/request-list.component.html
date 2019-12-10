@@ -1,0 +1,22 @@
+<div class="container">
+  <div *ngFor="let requestInfo of requestsInfo">
+    {{ requestInfo.name }}
+    <span>
+        <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click) = "onAccept(requestInfo.id)"
+        >Accept</button>
+  
+        <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click) = "onReject(requestInfo.id)"
+        >Reject</button>
+    </span>
+  </div>
+  
+  <p *ngIf="requests.length <= 0">no requests yet</p>
+</div>
