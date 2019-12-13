@@ -66,4 +66,8 @@ export class ChatService {
     });
     return observable;
     }
+
+    disconnect() {
+      this.socket.emit('forceDisconnect');
+    }
 }

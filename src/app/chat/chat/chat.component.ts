@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user.model';
-import { AuthService } from 'src/app/auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from '../chat.service';
-import { Chat } from 'src/app/models/chat.model';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnDestroy {
   user: string;
   room: string;
   messageText: string;
@@ -49,6 +45,10 @@ export class ChatComponent {
 
   typing() {
     this.chatService.typing({user: this.user, room: this.room});
+  }
+
+  ngOnDestroy() {
+    this.chatService.disconnect();
   }
 
 }

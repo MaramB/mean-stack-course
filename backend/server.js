@@ -75,6 +75,10 @@ io.on('connection', (socket)=>{
     socket.broadcast.to(data.room).emit('typing', {user:data.user, message:' is typing...'});
   });
 
+  socket.on('forceDisconnect', function(){
+    socket.disconnect(true);
+});
+
 });
 
 server.on("error", onError);
