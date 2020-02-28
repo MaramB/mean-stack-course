@@ -1,0 +1,26 @@
+<button *ngIf="request && request.status === 0 && !me && !alreadyRequested && !isAFriend" 
+class="btn btn-primary" (click)="onAddRequest()">Add Friend</button>
+
+<button *ngIf="request && request.status === 1 && !me && !alreadyRequested && !isAFriend" 
+class="btn btn-primary" disabled>Pending</button>
+
+<button *ngIf="me && !alreadyRequested && !isAFriend" 
+class="btn btn-primary" disabled>Profile</button>
+
+<button *ngIf="isAFriend" class="btn btn-primary" disabled>Friends</button>
+
+<span *ngIf="alreadyRequested && !isAFriend">
+    <button
+    mat-raised-button
+    color="accent"
+    type="button"
+    (click) = "onAccept(friendId)"
+    >Accept</button>
+
+    <button
+    mat-raised-button
+    color="warn"
+    type="button"
+    (click) = "onReject(friendId)"
+    >Reject</button>
+</span>

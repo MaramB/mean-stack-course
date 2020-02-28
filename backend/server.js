@@ -51,6 +51,7 @@ const server = http.createServer(app);
 const io = require('socket.io').listen(server);
 io.on('connection', (socket)=>{
   console.log("new connection is made");
+  dataUpdate(socket);
 
   socket.on('join', function(data){
     //joining
@@ -74,6 +75,13 @@ io.on('connection', (socket)=>{
    socket.on('typing', function(data){
     socket.broadcast.to(data.room).emit('typing', {user:data.user, message:' is typing...'});
   });
+
+  function dataUpdate(socket) { //chart
+    socket.emit('dataUpdate', Array.from({length: 8}, ()=>Math.floor(Math.random() * 40)));
+    setTimeout( () => {
+      dataUpdate(socket);
+    }, 2000);
+  };
 
   socket.on('forceDisconnect', function(){
     socket.disconnect(true);

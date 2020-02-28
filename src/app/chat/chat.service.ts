@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class ChatService {
-  private socket = io();
+  private socket = io('');
 
   joinRoom(data) {
     this.socket.emit('join', data);

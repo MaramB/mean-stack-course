@@ -1,3 +1,65 @@
-<div *ngFor="let user of users">
-    <a [routerLink] ="['/profile/', user._id]">{{ user.name }} </a>
-</div> 
+
+    <div *ngFor="let user of users">
+        <a [routerLink] ="['/user/', user._id]">{{ user.email }} </a>
+    </div> 
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Authentication using Passport.JS</h1>
+                    <p class="lead">If you don't have an account yet, signup <br> 
+                        or you can use one of the test emails above. (PW: 12345) ;) </p>
+                    <a class="btn btn-primary btn-lg mx-2" [routerLink] ="['/psprt/signup']" role="button">Sign up</a>
+                    <a class="btn btn-primary btn-lg" [routerLink] ="['/psprt/login']" role="button">Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Authentication using Json Web Tokens</h1>
+                  <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                  <a class="btn btn-primary btn-lg mx-2" [routerLink] ="['/jwt/signup']" role="button">Sign up</a>
+                  <a class="btn btn-primary btn-lg" [routerLink] ="['/jwt/login']" role="button">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Shopping Cart</h1>
+                    <p class="lead">if you want to add more products, <br>
+                    <a [routerLink]="['/admin/products']">click here</a></p>
+                    <a class="btn btn-primary btn-lg" [routerLink] ="['/products']" role="button">Browse Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Chart using chart.JS</h1>
+                  <p class="lead">This is a simple chart module with random generated numbers using chartJs and WebSocets.</p>
+                  <a class="btn btn-primary btn-lg" [routerLink] ="['/chart']" role="button">See Chart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Realtime Chat Application</h1>
+                  <p class="lead">a realtime chat app with no registration required <br>
+                      using WebSockets.</p>
+                  <a class="btn btn-primary btn-lg" [routerLink] ="['/chat']" role="button">Open</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+

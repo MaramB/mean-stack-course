@@ -23,7 +23,8 @@ export class FriendsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAllRequests() {
-    this.http.get<{message: string, requests: Request[]}>('api/requests')
+    this.http.get<{message: string, requests: Request[]}>('/api/requests'
+    ,{ withCredentials: true })
     .subscribe( requestsData => {
       console.log(requestsData);
       this.requests = requestsData.requests;
@@ -36,7 +37,8 @@ export class FriendsService {
   }
 
   getRequest(friendId: string) {
-    this.http.get<{message: string, request: Request}>('api/requests/' + friendId)
+    this.http.get<{message: string, request: Request}>('/api/requests/' 
+    + friendId,{ withCredentials: true })
     .subscribe( requestsData => {
       this.request = requestsData.request;
       this.currentRequest.next(this.request);
@@ -44,9 +46,10 @@ export class FriendsService {
   }
 
   checkRequest(friendId: string) {
-    this.http.get<{message: string, request: Request}>('api/requests/check/' + friendId)
+    this.http.get<{message: string, request: Request}>('/api/requests/check/' + friendId
+    ,{ withCredentials: true })
     .subscribe( requestsData => {
-      console.log(requestsData.message);
+      console.log(requestsData);
       this.checkedRequest = requestsData.request;
       this.getCheckRequest.next(this.checkedRequest);
     });
@@ -60,7 +63,8 @@ export class FriendsService {
 
   addRequest(userId: string, friendId: string) {
     const request: Request = {requester: userId, recipient: friendId, status: 1};
-    this.http.post<{message: string, request: Request}>('api/requests', request)
+    this.http.post<{message: string, request: Request}>('/api/requests', 
+    request,{ withCredentials: true })
       .subscribe((responseData) => {
         this.request = responseData.request;
         this.currentRequest.next(this.request);
@@ -69,7 +73,8 @@ export class FriendsService {
 
   deleteRequest(requesterId: string) {
     const userId = this.authService.getUserId()
-    this.http.delete<{message: string}>('api/requests/' + requesterId)
+    this.http.delete<{message: string}>('/api/requests/' + requesterId
+    ,{ withCredentials: true })
     .subscribe( response => {
       console.log(response.message);
       // console.log(this.requests);

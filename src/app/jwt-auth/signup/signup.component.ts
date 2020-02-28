@@ -1,15 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from 'src/app/auth.service';
 import { Subscription } from 'rxjs';
-import { User } from '../models/user.model';
+import { User } from 'src/app/models/user.model';
+
+
 
 @Component({
-  selector: 'app-signup',
+  selector: 'jwt-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit, OnDestroy {
+export class JWTSignupComponent implements OnInit, OnDestroy {
   user: User;
   userSub: Subscription;
 
@@ -28,7 +30,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSignup(form: NgForm) {
     if (form.invalid) return;
 
-    this.authService.addUser(form.value.fullName, form.value.username, form.value.email, form.value.password);
+    this.authService.addUserWithJwt(form.value.fullName, form.value.username, form.value.email, form.value.password);
   }
 
 } 

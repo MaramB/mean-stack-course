@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router();
+const passport = require('passport');
 
-const checkAuth = require('../middleware/check-auth');
+const checkAuth = require('../middleware/jwt-validation');
+const isValidUser = require('../middleware/passport-validation');
 const Request = require('../models/request');
+
+const router = express.Router();
 
 router.post("", (req, res, next) => {
     const request = new Request({
@@ -18,8 +21,8 @@ router.post("", (req, res, next) => {
     });
 });
 
-router.get("/:id", checkAuth, (req, res, next) => {
-    Request.findOne({ requester: req.userData.userId, recipient: req.params.id }).then( 
+router.get("/:id", isValidUser, (req, res, next) => {
+    Request.findOne({ requester: req.user._id, recipient: req.params.id }).then( 
         result => {
             console.log(result);
             res.status(200).json({
@@ -29,8 +32,8 @@ router.get("/:id", checkAuth, (req, res, next) => {
     });
 });
 
-router.get("/check/:id", checkAuth, (req, res, next) => {
-    Request.findOne({ requester: req.params.id, recipient: req.userData.userId }).then( 
+router.get("/check/:id", isValidUser, (req, res, next) => {
+    Request.findOne({ requester: req.params.id, recipient: req.user._id }).then( 
         result => {
             if(result) {
                 res.status(200).json({
@@ -41,8 +44,9 @@ router.get("/check/:id", checkAuth, (req, res, next) => {
     });
 });
 
-router.get("", checkAuth, (req, res, next) => {
-    Request.find({ recipient: req.userData.userId, status: 1 }).then( result => {
+
+router.get("", isValidUser, (req, res, next) => {
+    Request.find({ recipient: req.user._id, status: 1 }).then( result => {
         res.status(200).json({
             message: "fetched requests successfully",
             requests: result
@@ -50,8 +54,8 @@ router.get("", checkAuth, (req, res, next) => {
     });
 });
 
-router.delete("/:id", checkAuth, (req, res, next) => {
-    Request.deleteOne({ requester: req.params.id, recipient: req.userData.userId }).then(result => {
+router.delete("/:id", isValidUser, (req, res, next) => {
+    Request.deleteOne({ requester: req.params.id, recipient: req.user._id }).then(result => {
         res.status(200).json({ message: "deleted request"});
     });
 });

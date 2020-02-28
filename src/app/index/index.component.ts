@@ -16,8 +16,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.authService.getUsers();
     this.authService.getUsersListener().subscribe(
-      (users: User[]) => { this.users = users; 
-        console.log(this.users);
+      (users: User[]) => { this.users = users;
       });
   }
 

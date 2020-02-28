@@ -9,13 +9,19 @@
             <a mat-button routerLink="/chat" routerLinkActive="mat-accent">Chat</a>
         </li>
         <li>
-            <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
+            <a mat-button routerLink="/psprt/signup" routerLinkActive="mat-accent">Sign Up</a>
         </li>
-        <li>
-            <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</a>
+        <li *ngIf="!isLoggedIn">
+            <a mat-button routerLink="/psprt/login" routerLinkActive="mat-accent">Login</a>
         </li>
-        <li>
+        <li *ngIf="isLoggedIn">
             <button mat-button >Logout</button>
+        </li>
+        <li *ngIf="sessionCart && sessionCart.totalQty > 0">
+            <a routerLink="/shopping-cart" routerLinkActive="mat-accent">
+                <mat-icon [matBadge]="sessionCart.totalQty" matBadgeColor="warn">shopping_cart</mat-icon>
+            </a>
+            <!-- <a mat-button routerLink="/shopping-cart" routerLinkActive="mat-accent">{{sessionCart.totalQty}}</a> -->
         </li>
     </ul> 
 </mat-toolbar>

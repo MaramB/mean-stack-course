@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "facebook": {
+    "mean-modules": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -59,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "facebook:build"
+            "browserTarget": "mean-modules:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "facebook:build:production"
+              "browserTarget": "mean-modules:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "facebook:build"
+            "browserTarget": "mean-modules:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "facebook-e2e": {
+    "mean-modules-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -114,11 +114,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "facebook:serve"
+            "devServerTarget": "mean-modules:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "facebook:serve:production"
+              "devServerTarget": "mean-modules:serve:production"
             }
           }
         },
@@ -134,5 +134,5 @@
       }
     }
   },
-  "defaultProject": "facebook"
+  "defaultProject": "mean-modules"
 }

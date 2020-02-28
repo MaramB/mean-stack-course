@@ -13,13 +13,14 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class RequestListComponent implements OnInit, OnDestroy {
   requests: Request[] = [];
-  requestsInfo: {id: string, name: string}[] = [];
+  requestsInfo: {id: string, email: string}[] = [];
   requestsSub: Subscription;
   mySubscription: any;
 
-  constructor(private friendsService : FriendsService, private authService: AuthService, private router: Router) { 
-    
-  }
+  constructor(
+    private friendsService : FriendsService, 
+    private authService: AuthService, 
+    private router: Router) {}
 
   ngOnInit() {
     this.friendsService.getAllRequests();
@@ -31,7 +32,7 @@ export class RequestListComponent implements OnInit, OnDestroy {
           this.authService.getUser(this.requests[n].requester).subscribe(
             responseData => {
               this.requestsInfo.push(
-                {id: responseData.userId, name: responseData.fullName} );
+                {id: responseData.userId, email: responseData.email} );
           });
         }
       });
